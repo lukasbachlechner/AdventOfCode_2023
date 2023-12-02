@@ -6,16 +6,6 @@ class Day02 extends GenericDay {
 
   @override
   List<Game> parseInput() {
-    const mockInput = '''
-Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
-Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
-Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
-Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
-Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green''';
-    /*  return InputUtil.fromMultiLineString(mockInput)
-        .getPerLine()
-        .map(Game.fromInputLine)
-        .toList(); */
     return input.getPerLine().map(Game.fromInputLine).toList();
   }
 
@@ -24,10 +14,8 @@ Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green''';
     const maxReveal = Reveal(red: 12, green: 13, blue: 14);
     return parseInput().map((game) {
       if (game.isPossibleWithMaxCubes(maxReveal: maxReveal)) {
-        print('Game ${game.id} is possible');
         return game.id;
       }
-      print('Game ${game.id} is not possible');
       return 0;
     }).reduce((a, b) => a + b);
   }

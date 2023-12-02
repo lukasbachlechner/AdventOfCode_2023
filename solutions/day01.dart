@@ -45,6 +45,7 @@ class Day01 extends GenericDay {
         .reduce((a, b) => a + b);
   }
 
+  /// Returns a map that maps the number words to their corresponding number.
   Map<String, int> get numberMap => {
         'one': 1,
         'two': 2,
@@ -57,10 +58,13 @@ class Day01 extends GenericDay {
         'nine': 9,
       };
 
+  /// Replaces all words in the line with their corresponding number and returns
+  /// the resulting string.
   String replaceWordsWithNumbers(String line) {
-    // Using a splay tree map to keep the resulting numbers sorted by their
-    // original index int the input line
-    final result = SplayTreeMap<int, int>();
+    // Keep a record of the original index of each word/number in the line.
+    // Using a SplayTreeMap allows us to have the indices sorted in ascending
+    // order.
+    final indexToValueMap = SplayTreeMap<int, int>();
 
     // Iterate over all words and numbers in the line
     for (final entry in numberMap.entries) {
@@ -72,11 +76,11 @@ class Day01 extends GenericDay {
       for (final match in regex.allMatches(line)) {
         // We can be sure that we only have one match per index, because there
         // can be no overlapping matches (like e. g. 'nine' and 'ninety')
-        result[match.start] = entry.value;
+        indexToValueMap[match.start] = entry.value;
       }
     }
 
     // Return the resulting string by joining the values of the map
-    return result.values.join();
+    return indexToValueMap.values.join();
   }
 }

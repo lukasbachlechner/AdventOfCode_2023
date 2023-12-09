@@ -23,7 +23,8 @@ class InputUtil {
   /// final lines = input.getPerLine();
   InputUtil.fromMultiLineString(String input)
       : _inputAsString = input,
-        _inputAsList = input.split('\n');
+        _inputAsList = input.split('\n')
+          ..removeWhere((element) => element.isEmpty);
 
   final String _inputAsString;
   final List<String> _inputAsList;
